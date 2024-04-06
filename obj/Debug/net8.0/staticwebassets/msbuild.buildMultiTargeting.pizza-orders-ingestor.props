@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\pizza-orders-ingestor.props" />
+</Project>

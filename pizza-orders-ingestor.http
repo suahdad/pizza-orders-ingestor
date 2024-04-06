@@ -1,0 +1,6 @@
+@pizza_orders_ingestor_HostAddress = http://localhost:5157
+
+GET {{pizza_orders_ingestor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

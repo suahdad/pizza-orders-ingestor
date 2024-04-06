@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ZvhaA6oJv2Whysz81ayHZu4caAFaq/bwsuGpLemSTbE=",
+  "Source": "pizza-orders-ingestor",
+  "BasePath": "_content/pizza-orders-ingestor",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
