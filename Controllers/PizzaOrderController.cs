@@ -39,9 +39,5 @@ namespace pizza_orders_ingestor.Controllers
             };
         }
 
-        protected override IActionResult result(List<Pizzaorder> saved)
-        {
-            return CreatedAtAction(nameof(PizzaOrderController),new {count = saved.Count});
-        }
     }
 }

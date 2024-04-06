@@ -13,16 +13,15 @@ using Mysqlx;
 using System.Data.Entity;
 using System.Windows.Markup;
 using Google.Protobuf.WellKnownTypes;
+using System.Runtime.CompilerServices;
 
 namespace pizza_orders_ingestor.Controllers
 {
-    [Route("[controller]")]
     public abstract class IPizzaPlaceControllerBase<T> : ControllerBase
     {
         protected abstract T parseModel(String[] vals,List<T> items);
 
         private readonly PizzaPlaceDbContext _context;
-        protected abstract IActionResult result(List<T> savedObjects);
         protected abstract List<T> filterOutExisting(List<T> items);
         public IPizzaPlaceControllerBase(PizzaPlaceDbContext context)
         { this._context = context; }
@@ -32,8 +31,7 @@ namespace pizza_orders_ingestor.Controllers
         [Consumes(MediaTypeNames.Multipart.FormData)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> PostFile(IFormFile file)
-        {
+        public async Task<IActionResult> PostFile(IFormFile file){
             var csvFileHasHeader = Request.Query["hasHeader"].First();
             var readStream = file.OpenReadStream();
             List<T> items = new List<T>();
@@ -68,8 +66,7 @@ namespace pizza_orders_ingestor.Controllers
                 return BadRequest(e);
             }
             // await _context.SaveChangesAsync();
-            return this.result(forSaving);
+            return CreatedAtAction(nameof(PostFile),new {forSaving.Count});
         }
-
     }
 }
