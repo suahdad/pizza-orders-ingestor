@@ -82,16 +82,16 @@ public partial class PizzaPlaceDbContext : DbContext
 
         modelBuilder.Entity<Pizzaorder>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("pizzaorders");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(e => e.Datetime)
-                .HasColumnType("datetime")
-                .HasColumnName("datetime");
+            entity.ToTable("pizzaorders");
+
             entity.Property(e => e.Id)
                 .HasColumnType("mediumint unsigned")
                 .HasColumnName("id");
+            entity.Property(e => e.Datetime)
+                .HasColumnType("datetime")
+                .HasColumnName("datetime");
         });
 
         modelBuilder.Entity<Pizzaprice>(entity =>
