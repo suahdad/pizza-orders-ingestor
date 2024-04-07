@@ -130,15 +130,15 @@ namespace pizza_orders_ingestor.Controllers
 
         protected override Tuple<Pizzaprice[],Pizzaprice[]> filterOutExisting(List<Pizzaprice> items)
         {
-            var forSaving = new Pizzaprice[]{};
-            var forUpdate = new Pizzaprice[]{};
+            var forSaving = new List<Pizzaprice>();
+            var forUpdate = new List<Pizzaprice>();
 
             var existing = _context.Pizzaprices.Select(price => price.Id);
             items.ForEach(item => {
-                if(existing.Contains(item.Id)){forUpdate.Append(item);}
-                else{forSaving.Append(item);}
+                if(existing.Contains(item.Id)){forUpdate.Add(item);}
+                else{forSaving.Add(item);}
             });
-            return new Tuple<Pizzaprice[],Pizzaprice[]>(forSaving,forUpdate);
+            return new Tuple<Pizzaprice[],Pizzaprice[]>(forSaving.ToArray(),forUpdate.ToArray());
         }
     }
 }
