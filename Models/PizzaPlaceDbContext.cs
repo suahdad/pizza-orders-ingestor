@@ -32,9 +32,9 @@ public partial class PizzaPlaceDbContext : DbContext
     {
         modelBuilder.Entity<Orderdetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("orderdetails");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("orderdetails");
 
             entity.Property(e => e.Id)
                 .HasColumnType("mediumint unsigned")
@@ -51,16 +51,16 @@ public partial class PizzaPlaceDbContext : DbContext
 
         modelBuilder.Entity<Pizzadetail>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("pizzadetails");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
-            entity.Property(e => e.Category)
-                .HasMaxLength(20)
-                .HasColumnName("category");
+            entity.ToTable("pizzadetails");
+
             entity.Property(e => e.Id)
                 .HasMaxLength(20)
                 .HasColumnName("id");
+            entity.Property(e => e.Category)
+                .HasMaxLength(20)
+                .HasColumnName("category");
             entity.Property(e => e.Name)
                 .HasMaxLength(100)
                 .HasColumnName("name");
@@ -68,16 +68,16 @@ public partial class PizzaPlaceDbContext : DbContext
 
         modelBuilder.Entity<Pizzaingredient>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("pizzaingredients");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
 
+            entity.ToTable("pizzaingredients");
+
+            entity.Property(e => e.Id)
+                .HasMaxLength(20)
+                .HasColumnName("id");
             entity.Property(e => e.Ingredients)
                 .HasMaxLength(100)
                 .HasColumnName("ingredients");
-            entity.Property(e => e.PizzaId)
-                .HasMaxLength(20)
-                .HasColumnName("pizza_id");
         });
 
         modelBuilder.Entity<Pizzaorder>(entity =>
@@ -96,9 +96,9 @@ public partial class PizzaPlaceDbContext : DbContext
 
         modelBuilder.Entity<Pizzaprice>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("pizzaprices");
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("pizzaprices");
 
             entity.Property(e => e.Id)
                 .HasMaxLength(20)

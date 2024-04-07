@@ -5,7 +5,7 @@ namespace pizza_orders_ingestor;
 
 public partial class Orderdetail
 {
-    public uint? Id { get; set; }
+    public uint Id { get; set; }
 
     public uint? OrderId { get; set; }
 

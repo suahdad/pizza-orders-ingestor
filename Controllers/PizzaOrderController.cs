@@ -25,13 +25,20 @@ namespace pizza_orders_ingestor.Controllers
             this._context = context;
         }
 
-        protected override List<Pizzaorder> filterOutExisting(List<Pizzaorder> items)
+        protected override Tuple<Pizzaorder[],Pizzaorder[]> filterOutExisting(List<Pizzaorder> items)
         {
-            var existing = _context.Pizzaorders.Select(order => order.Id);
-            return items.Where(order => !existing.Contains(order.Id)).ToList();
+            var forSaving = new Pizzaorder[]{};
+            var forUpdate = new Pizzaorder[]{};
+
+            var existing = _context.Pizzaorders.Select(price => price.Id);
+            items.ForEach(item => {
+                if(existing.Contains(item.Id)){forUpdate.Append(item);}
+                else{forSaving.Append(item);}
+            });
+            return new Tuple<Pizzaorder[],Pizzaorder[]>(forSaving,forUpdate);
         }
 
-        protected override Pizzaorder parseModel(string[] vals, List<Pizzaorder> items)
+        protected override Pizzaorder parseModel(string[] vals)
         {
             return new Pizzaorder(){
                 Id = uint.Parse(vals[0]),

@@ -5,7 +5,7 @@ namespace pizza_orders_ingestor;
 
 public partial class Pizzaprice
 {
-    public string? Id { get; set; }
+    public string Id { get; set; } = null!;
 
     public string? PizzaId { get; set; }
 
