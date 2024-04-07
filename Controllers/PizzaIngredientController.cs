@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using pizza_orders_ingestor;
 
@@ -121,9 +122,10 @@ namespace pizza_orders_ingestor.Controllers
 
         protected override Pizzaingredient parseModel(string[] vals)
         {
+            var joined = String.Join(",",vals);
             return new Pizzaingredient(){
                 Id = vals[0],
-                Ingredients = vals[3]
+                Ingredients = joined.Substring(vals[0].Length+vals[1].Length+vals[2].Length+3) //3 commas
             };
         }
 
